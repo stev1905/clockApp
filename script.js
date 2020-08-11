@@ -2,6 +2,8 @@ var today = new Date();
 var hours = today.getHours() - 12;
 var isToggle = true;
 
+document.getElementsByClassName("clock")[0].style.display = "none";
+
 function myTimer() {
     var today = new Date();
     var seconds = today.getSeconds();
@@ -22,7 +24,6 @@ function myTimer() {
     var currentTime = hours + ":" + minutes;
     var currentDate = dayOfWeek + " - " + month +" "+ day;
 
-    console.log(minutes)
     //DOM manipulation
     document.getElementsByClassName('time')[0].innerText = currentTime;
     document.getElementsByClassName('date')[0].innerText = currentDate;
