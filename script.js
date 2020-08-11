@@ -3,7 +3,7 @@ function myTimer() {
     var hours = today.getHours();
     var minutes = today.getMinutes();
     var seconds = today.getSeconds();
-    var day = today.getDay();
+    var day = today.getDate();
     var aMpM = 'AM';
     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -18,12 +18,15 @@ function myTimer() {
         seconds = '0'+ seconds;
     }
 
-    var currentTime = hours + ":" + minutes + ":" + seconds +' '+aMpM;
-    var currentDate = dayOfWeek + "-" + month +" "+ day;
+    var currentTime = hours + ":" + minutes;
+    var currentDate = dayOfWeek + " - " + month +" "+ day;
 
     document.getElementsByClassName('time')[0].innerText = currentTime;
     document.getElementsByClassName('date')[0].innerText = currentDate;
+    document.getElementsByClassName('specTime')[0].children[0].innerText = aMpM;
+    document.getElementsByClassName('specTime')[0].children[1].innerText = seconds;
 }
+
 var myVar = setInterval(function() {
     myTimer();
   }, 1000);
