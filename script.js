@@ -13,16 +13,16 @@ function myTimer() {
     var dayOfWeek = days[today.getDay()];
     var month = months[today.getMonth()];
 
-    var currentTime = hours + ":" + minutes;
-    var currentDate = dayOfWeek + " - " + month +" "+ day;
-
-    if(seconds < 10) {
-        seconds = '0'+ seconds;
-    }
-
     if(minutes < 10) {
         minutes = '0'+ minutes;
     }
+    if(seconds < 10) {
+        seconds = '0'+ seconds;
+    }
+    var currentTime = hours + ":" + minutes;
+    var currentDate = dayOfWeek + " - " + month +" "+ day;
+
+    console.log(minutes)
     //DOM manipulation
     document.getElementsByClassName('time')[0].innerText = currentTime;
     document.getElementsByClassName('date')[0].innerText = currentDate;
