@@ -1,0 +1,17 @@
+body {
+   background-image: url('./images/background.jpg');
+    background-size: cover;
+    color: white;
+    align-items: center; 
+}
+
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.time {
+    font-size: 5em;
+}
