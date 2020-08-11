@@ -1,16 +1,21 @@
 var today = new Date();
-var hours = today.getHours();
-var minutes = today.getMinutes();
-var seconds = today.getSeconds();
-var day = today.getDate();
-var aMpM = 'AM';
-var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-var dayOfWeek = days[today.getDay()];
-var month = months[today.getMonth()];
-var is24HourFormat = true;
+var hours = today.getHours() - 12;
+var isToggle = true;
 
 function myTimer() {
+    var today = new Date();
+    var seconds = today.getSeconds();
+    var minutes = today.getMinutes();
+    var day = today.getDate();
+    var aMpM = 'AM';
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var dayOfWeek = days[today.getDay()];
+    var month = months[today.getMonth()];
+
+    var currentTime = hours + ":" + minutes;
+    var currentDate = dayOfWeek + " - " + month +" "+ day;
+
     if(seconds < 10) {
         seconds = '0'+ seconds;
     }
@@ -18,10 +23,6 @@ function myTimer() {
     if(minutes < 10) {
         minutes = '0'+ minutes;
     }
-
-    var currentTime = hours + ":" + minutes;
-    var currentDate = dayOfWeek + " - " + month +" "+ day;
-
     //DOM manipulation
     document.getElementsByClassName('time')[0].innerText = currentTime;
     document.getElementsByClassName('date')[0].innerText = currentDate;
@@ -30,21 +31,19 @@ function myTimer() {
 }
 
 function toggle24Format() {
-    if(is24HourFormat === false) {
+    if(today.getHours() > 12 && isToggle === true) {
+        aMpM = 'PM';
         hours = hours + 12;
-        is24HourFormat = true;
+        isToggle = false;
     }
 }
 
 function toggle12Format() {
-    if(hours > 12 && is24HourFormat === true) {
+    if(today.getHours() > 12 && isToggle === false) {
         hours = hours - 12;
-        is24HourFormat = false;
+        isToggle = true;
     }
 }
-//Automatically update seconds
-setInterval(function() {
-    myTimer();
-}, 1000);
 
-   
+//automatically update seconds.
+setInterval(myTimer, 1000);

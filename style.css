@@ -45,6 +45,7 @@ body {
 button {
     transition-duration: 0.4s;
     text-decoration: none;
+    cursor:pointer;
     border: none;
     padding: 10px 25px;
     display: inline-block;
