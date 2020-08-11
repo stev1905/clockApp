@@ -2,8 +2,6 @@ var today = new Date();
 var hours = today.getHours() - 12;
 var isToggle = true;
 
-document.getElementsByClassName("clock")[0].style.display = "none";
-
 function myTimer() {
     var today = new Date();
     var seconds = today.getSeconds();
