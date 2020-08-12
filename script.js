@@ -1,9 +1,9 @@
 var today = new Date();
-var hours = today.getHours() - 12;
 var isToggle = true;
 
 function myTimer() {
     var today = new Date();
+    var hours = today.getHours();
     var seconds = today.getSeconds();
     var minutes = today.getMinutes();
     var day = today.getDate();
@@ -19,6 +19,11 @@ function myTimer() {
     if(seconds < 10) {
         seconds = '0'+ seconds;
     }
+
+    if(hours > 12) {
+        hours = hours - 12;
+    }
+
     var currentTime = hours + ":" + minutes;
     var currentDate = dayOfWeek + " - " + month +" "+ day;
 
@@ -43,6 +48,9 @@ function toggle12Format() {
         isToggle = true;
     }
 }
-
+myTimer();
 //automatically update seconds.
 setInterval(myTimer, 1000);
+
+let backGround = document.querySelector("body")
+backGround.style.backgroundImage = 'url(./images/background.png)'
