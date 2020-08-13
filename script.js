@@ -1,7 +1,8 @@
 var today = new Date();
 var isToggle = true;
-var aMpM = '';
+var aMpM = 'AM';
 var hours = today.getHours();
+
 (function() {
     if(today.getHours() > 12) {
         aMpM = 'PM'
