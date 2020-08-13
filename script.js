@@ -1,29 +1,32 @@
 var today = new Date();
 var isToggle = true;
+var aMpM = '';
+var hours = today.getHours();
+(function() {
+    if(today.getHours() > 12) {
+        aMpM = 'PM'
+        hours = hours - 12;
+    } else {
+        aMpM = 'AM'
+        hours = hours;
+    }
+})();
 
 function myTimer() {
     var today = new Date();
-    var hours = today.getHours();
     var seconds = today.getSeconds();
     var minutes = today.getMinutes();
     var day = today.getDate();
-    var aMpM = 'AM';
     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     var dayOfWeek = days[today.getDay()];
     var month = months[today.getMonth()];
-
     if(minutes < 10) {
         minutes = '0'+ minutes;
     }
     if(seconds < 10) {
         seconds = '0'+ seconds;
     }
-
-    if(hours > 12) {
-        hours = hours - 12;
-    }
-
     var currentTime = hours + ":" + minutes;
     var currentDate = dayOfWeek + " - " + month +" "+ day;
 
