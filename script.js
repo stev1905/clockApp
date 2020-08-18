@@ -1,60 +1,68 @@
-var today = new Date();
-var isToggle = true;
-var aMpM = 'AM';
-var hours = today.getHours();
+let isMilitaryTime = true;
+let hours;
+let intervalID;
 
-(function() {
-    if(today.getHours() > 12) {
-        aMpM = 'PM'
-        hours = hours - 12;
-    } else {
-        aMpM = 'AM'
-        hours = hours;
-    }
-})();
+document.addEventListener('DOMContentLoaded', function() {
+    myTimer();
+    setInterval(myTimer, 1000);
+    
+    let backGround = document.querySelector("body")
+    backGround.style.backgroundImage = 'url(./images/background.png)'
+});
 
-function myTimer() {
-    var today = new Date();
-    var seconds = today.getSeconds();
-    var minutes = today.getMinutes();
-    var day = today.getDate();
-    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var dayOfWeek = days[today.getDay()];
-    var month = months[today.getMonth()];
-    if(minutes < 10) {
-        minutes = '0'+ minutes;
-    }
-    if(seconds < 10) {
-        seconds = '0'+ seconds;
-    }
-    var currentTime = hours + ":" + minutes;
-    var currentDate = dayOfWeek + " - " + month +" "+ day;
+let button = document.getElementById('button');
+button.addEventListener('click', (e) => {
+    isMilitaryTime = !isMilitaryTime;
+    changeTimeFormat();
+
+    clearInterval(intervalID);
+    myTimer();
+    intervalID = setTimeout(myTimer, 1000);
+})
+
+const myTimer = () => {
+    
+    let today = new Date();
+     
+    let seconds = formatTime(today.getSeconds());
+    const minutes = formatTime(today.getMinutes());
+    hours = formatTime(today.getHours());
+    const day = today.getDate();
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const dayOfWeek = days[today.getDay()];
+    const month = months[today.getMonth()];
+
+    changeTimeFormat();
+
+    let currentTime = hours + ":" + minutes;
+    let currentDate = dayOfWeek + " - " + month +" "+ day;
 
     //DOM manipulation
     document.getElementsByClassName('time')[0].innerText = currentTime;
     document.getElementsByClassName('date')[0].innerText = currentDate;
-    document.getElementsByClassName('specTime')[0].children[0].innerText = aMpM;
     document.getElementsByClassName('specTime')[0].children[1].innerText = seconds;
 }
 
-function toggle24Format() {
-    if(today.getHours() > 12 && isToggle === true) {
-        aMpM = 'PM';
-        hours = hours + 12;
-        isToggle = false;
+const getAmPM = (hours) => {
+    let aMpM = isMilitaryTime ? "" : hours < 12 ? 'AM' : 'PM';
+    document.getElementsByClassName('specTime')[0].children[0].innerText = aMpM;
+}
+
+const formatTime = (time) => {
+    return time < 10 ? "0" + time : time; 
+}
+
+const changeTimeFormat = () => {
+    if(isMilitaryTime) {
+        getAmPM()
+        button.innerText = 'Change to 12hr Format';
+    } else if(!isMilitaryTime) {
+        if(hours > 12) {
+            hours -= 12;
+            getAmPM()
+            button.innerText = 'Change to 24hr Format';
+        }
     }
 }
 
-function toggle12Format() {
-    if(today.getHours() > 12 && isToggle === false) {
-        hours = hours - 12;
-        isToggle = true;
-    }
-}
-myTimer();
-//automatically update seconds.
-setInterval(myTimer, 1000);
-
-let backGround = document.querySelector("body")
-backGround.style.backgroundImage = 'url(./images/background.png)'
