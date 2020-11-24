@@ -1,5 +1,5 @@
 let isMilitaryTime = true;
-let hours;
+let hours = 3;
 let intervalID;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,27 +13,22 @@ document.addEventListener('DOMContentLoaded', function() {
 let button = document.getElementById('button');
 button.addEventListener('click', (e) => {
     isMilitaryTime = !isMilitaryTime;
-    changeTimeFormat();
-
     clearInterval(intervalID);
     myTimer();
     intervalID = setTimeout(myTimer, 1000);
 })
 
 const myTimer = () => {
-    
-    let today = new Date();
-     
-    let seconds = formatTime(today.getSeconds());
+    const today = new Date();
+    const seconds = formatTime(today.getSeconds());
     const minutes = formatTime(today.getMinutes());
     hours = formatTime(today.getHours());
+    changeTimeFormat();
     const day = today.getDate();
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const dayOfWeek = days[today.getDay()];
     const month = months[today.getMonth()];
-
-    changeTimeFormat();
 
     let currentTime = hours + ":" + minutes;
     let currentDate = dayOfWeek + " - " + month +" "+ day;
