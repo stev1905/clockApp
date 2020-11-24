@@ -1,11 +1,11 @@
 let isMilitaryTime = true;
-let hours = 3;
+let hours;
 let intervalID;
 
 document.addEventListener('DOMContentLoaded', function() {
     myTimer();
     setInterval(myTimer, 1000);
-    
+    console.log(setInterval(myTimer, 1000))
     let backGround = document.querySelector("body")
     backGround.style.backgroundImage = 'url(./images/background.png)'
 });
@@ -13,9 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
 let button = document.getElementById('button');
 button.addEventListener('click', (e) => {
     isMilitaryTime = !isMilitaryTime;
+    changeTimeFormat();
+
     clearInterval(intervalID);
     myTimer();
-    intervalID = setTimeout(myTimer, 1000);
+    intervalID = setInterval(myTimer, 1000);
 })
 
 const myTimer = () => {
@@ -47,7 +49,6 @@ const getAmPM = (hours) => {
 const formatTime = (time) => {
     return time < 10 ? "0" + time : time; 
 }
-
 const changeTimeFormat = () => {
     if(isMilitaryTime) {
         getAmPM()
